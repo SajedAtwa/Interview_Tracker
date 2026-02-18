@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Backend (Spring Boot / Maven)
+backend/target/
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# Frontend (Vite / React)
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+frontend/.vite/
+
+# General
+*.log

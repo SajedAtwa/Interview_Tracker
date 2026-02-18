@@ -1,0 +1,769 @@
+/* src/App.css
+*/
+
+:root {
+  --bg0: #0b1020;
+  --bg1: #0b1b3a;
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.65);
+
+  --card: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --radius: 18px;
+
+  --primary: #7c3aed;
+  --danger: #ef4444;
+
+  /* Light (white panels + modal) */
+  --ink: rgba(15, 23, 42, 0.92);
+  --inkMuted: rgba(15, 23, 42, 0.65);
+  --lightBorder: rgba(15, 23, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 700px at 20% 10%, #1a2b63 0%, transparent 55%),
+    radial-gradient(900px 600px at 85% 25%, #3b1c7b 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+/* Page shell */
+.page {
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 40px 16px;
+}
+
+.container {
+  width: min(700px, 100%);
+  margin-inline: auto;
+  max-width: 100%;
+}
+
+/* App card */
+.shell {
+  width: 100%;
+  background: linear-gradient(180deg, var(--card) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary) 0%, #06b6d4 60%, #22c55e 120%);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.25);
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+.content {
+  padding: 18px;
+}
+
+/* ---------- GLOBAL DARK INPUTS (Login/Register) ---------- */
+
+.label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--text);
+  outline: none;
+  font-size: 15px; /* slightly bigger */
+}
+
+.input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Light panel placeholders (Add Interview section) */
+.panel .input::placeholder,
+.panel textarea::placeholder {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: rgba(124, 58, 237, 0.8);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+}
+
+.textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+/* Ensure datetime/select icons are visible on dark inputs too if used */
+input[type="datetime-local"].input {
+  color-scheme: dark;
+}
+
+/* Add Interview - datetime icon closer to the right edge */
+.panel input[type="datetime-local"].input {
+  padding-right: 8px; /* smaller = icon moves further right */
+}
+
+/* Optional fine adjustment */
+.panel input[type="datetime-local"].input::-webkit-calendar-picker-indicator {
+  transform: translateX(35px); /* increase if needed */
+  cursor: pointer;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn {
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.06s ease, background 0.18s ease, border-color 0.18s ease,
+    filter 0.18s ease;
+  user-select: none;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #6a5af9, #7b5cff);
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btnPrimary:hover {
+  background: linear-gradient(135deg, #5a4af0, #6d4cff);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(106, 90, 249, 0.35);
+}
+
+.btnPrimary:focus,
+.btnPrimary:active {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.4);
+}
+
+.btnOutline {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* IMPORTANT: Delete button should never “white out” */
+.btnDanger {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.38);
+  color: #fff;
+}
+
+.btnDanger:hover {
+  background: rgba(239, 68, 68, 0.24);
+  border-color: rgba(239, 68, 68, 0.50);
+  filter: none;
+}
+
+.btnDanger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- ALERTS ---------- */
+
+.alert {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.alertError {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.alertOk {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- AUTH PAGES (Login/Register) ----------
+   Keep stacked layout. Don’t force grid/columns here. */
+
+.authPage {
+  padding: 12px 0 6px 0; /* less tall above the title */
+  max-width: 720px;
+}
+
+.authTitle {
+  margin: 0 0 10px 0;
+  font-size: 34px;
+  letter-spacing: 0.2px;
+}
+
+.authForm {
+  display: grid;
+  gap: 14px; /* nice spacing between stacked fields */
+  max-width: 680px;
+}
+
+.authLabel {
+  display: grid;
+  gap: 8px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.authSubmit {
+  justify-self: start;
+  padding: 12px 18px;
+  border-radius: 16px;
+}
+
+/* ---------- INTERVIEWS PAGE (WHITE PANELS) ---------- */
+
+.sectionTitleRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+  color: var(--ink);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.formGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.twoCol {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 800px) {
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.labelText {
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* Cards grid */
+.cardsGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  align-items: start;
+}
+
+/* Interview card item */
+.cardItem {
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.12);
+}
+
+.notesBox {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(248, 250, 252, 0.85);
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+
+.cardActions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Status pill */
+.pill {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.04);
+  white-space: nowrap;
+  color: rgba(15, 23, 42, 0.85);
+}
+
+.pill-scheduled {
+  background: rgba(59, 130, 246, 0.10);
+  border-color: rgba(59, 130, 246, 0.22);
+}
+.pill-completed {
+  background: rgba(34, 197, 94, 0.10);
+  border-color: rgba(34, 197, 94, 0.22);
+}
+.pill-rejected {
+  background: rgba(239, 68, 68, 0.10);
+  border-color: rgba(239, 68, 68, 0.22);
+}
+.pill-offer {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.24);
+}
+
+/* Empty state */
+.emptyState {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(15, 23, 42, 0.18);
+  background: rgba(248, 250, 252, 0.7);
+  color: rgba(15, 23, 42, 0.72);
+}
+
+/* ---------- WHITE PANEL INPUTS (must match size/style) ---------- */
+
+.panel .input,
+.panel textarea.input,
+.panel select.input {
+  height: 54px; /* match datetime + select */
+  background: rgba(255, 255, 255, 0.94);
+  color: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 14px;
+  padding: 14px 14px;
+  font-size: 18px;
+}
+
+.panel textarea.input {
+  height: auto;
+  min-height: 96px;
+  resize: vertical;
+  font-size: 16px;
+}
+
+/* Make datetime + select icons visible on light backgrounds */
+.panel input[type="datetime-local"].input {
+  color-scheme: light;
+  padding-right: 44px; /* room for calendar icon */
+}
+
+/* Ensure the calendar icon is not clipped */
+.panel input[type="datetime-local"].input::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+/* SELECT: keep arrow visible + consistent padding (no “missing arrow”) */
+.panel select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* room for arrow */
+  padding-right: 44px;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(15, 23, 42, 0.78) 50%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.78) 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%,
+    0 0;
+  background-size:
+    6px 6px,
+    6px 6px,
+    100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Focus state for white panel inputs */
+.panel .input:focus,
+.panel textarea.input:focus,
+.panel select.input:focus {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.18);
+}
+
+/* ---------- CARD BUTTONS (Edit/Delete) inside white cards ---------- */
+
+.cardItem .btn {
+  border-color: rgba(15, 23, 42, 0.18);
+  background: rgba(15, 23, 42, 0.04);
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.cardItem .btn:hover {
+  background: rgba(15, 23, 42, 0.07);
+  border-color: rgba(15, 23, 42, 0.24);
+}
+
+.cardItem .btnPrimary {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-color: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+.cardItem .btnPrimary:hover {
+  filter: brightness(1.04);
+}
+
+/* Delete stays red and readable */
+.cardItem .btnDanger {
+  background: rgba(239, 68, 68, 0.90);
+  border-color: rgba(239, 68, 68, 0.55);
+  color: #fff;
+}
+
+.cardItem .btnDanger:hover {
+  background: rgba(239, 68, 68, 0.98);
+  border-color: rgba(239, 68, 68, 0.70);
+}
+
+/* ---------- EDIT MODAL (white like panels) ---------- */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.45);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 999;
+}
+
+.modalCard {
+  width: min(820px, 100%);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  color: var(--ink);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+.modalHeader .muted {
+  color: rgba(15, 23, 42, 0.62);
+}
+
+.modalCloseBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  background: rgba(15, 23, 42, 0.04);
+  color: rgba(15, 23, 42, 0.85);
+  cursor: pointer;
+}
+
+.modalCloseBtn:hover {
+  background: rgba(15, 23, 42, 0.07);
+}
+
+.modalBody {
+  padding: 16px;
+}
+
+.modalFooter {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  padding: 14px 16px 16px 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+/* Modal fields match panel fields */
+.modalCard .labelText {
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.modalCard .input,
+.modalCard textarea.input,
+.modalCard select.input {
+  height: 54px;
+  background: rgba(255, 255, 255, 0.94);
+  color: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 14px;
+  padding: 14px 14px;
+  font-size: 18px;
+}
+
+.modalCard textarea.input {
+  height: auto;
+  min-height: 110px;
+  font-size: 16px;
+}
+
+.modalCard input[type="datetime-local"].input {
+  color-scheme: light;
+  padding-right: 8px;
+}
+
+.modalCard input[type="datetime-local"].input::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.modalCard select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 44px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(15, 23, 42, 0.78) 50%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.78) 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%,
+    0 0;
+  background-size:
+    6px 6px,
+    6px 6px,
+    100% 100%;
+  background-repeat: no-repeat;
+}
+
+.modalCard .input:focus,
+.modalCard textarea.input:focus,
+.modalCard select.input:focus {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.18);
+}
+
+/* Modal buttons: keep visible (no white-out) */
+.modalCard .btn {
+  border-color: rgba(15, 23, 42, 0.16);
+  background: rgba(15, 23, 42, 0.04);
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.modalCard .btn:hover {
+  background: rgba(15, 23, 42, 0.07);
+}
+
+.modalCard .btnPrimary {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-color: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+.modalCard .btnPrimary:hover {
+  filter: brightness(1.04);
+}
+
+.modalCard .btnOutline {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+/* Safety: never let anything force horizontal overflow */
+.page,
+.container,
+.shell {
+  max-width: 100%;
+}
+
+/* ==============================
+   AUTH (Login/Register) — center the form so there isn't a big right gap
+   (keeps stacked layout, changes nothing else)
+   ============================== */
+
+.authPage {
+  width: 100%;
+  max-width: 600px;     /* controls how wide the auth block is */
+  margin: 0 auto;       /* centers it inside the shell */
+}
+
+.authForm {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+}
+
+.authLabel {
+  width: 100%;
+  display: grid;        /* stacks label text over input */
+  gap: 3px;
+}
+
+/* keep inputs full width inside the auth form */
+.authPage .input {
+  width: 100%;
+}
+
+/* ==============================
+   FIX: Saved interviews right-side empty space
+   + make Role/Date text readable
+   ============================== */
+
+/* Center the cards so you don't get that awkward "extra space" on the right */
+.cardsGrid{
+  justify-items: center;     /* center each card inside its grid cell */
+  align-items: start;
+}
+
+/* Keep cards a consistent width so the grid looks balanced */
+.cardItem{
+  width: 100%;
+  max-width: 420px;          /* adjust 380–460 if you want tighter/wider */
+}
+
+/* Ensure the Role + Date labels and "muted" text are visible on white cards */
+.cardItem .muted,
+.cardItem .kv{
+  color: rgba(15, 23, 42, 0.72) !important;
+}
+
+/* If you have a tiny label like "Date" next to the bold date, make it readable */
+.cardItem .kv strong,
+.cardItem .kv b{
+  color: rgba(15, 23, 42, 0.80) !important;
+}
