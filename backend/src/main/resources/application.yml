@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/interview_tracker
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/interview_tracker}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   jpa:
     hibernate:
       ddl-auto: update
@@ -12,6 +12,10 @@ spring:
 
 app:
   jwt:
-    # MUST be at least 32 chars for HS256
-    secret: "THIS_IS_A_32+_CHAR_SECRET_KEY_CHANGE_ME_12345"
+    secret: ${APP_JWT_SECRET:THIS_IS_A_32+_CHAR_SECRET_KEY_CHANGE_ME_12345}
     expiration-ms: 86400000
+
+
+server:
+  address: 0.0.0.0
+  port: 8080
