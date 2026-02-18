@@ -49,40 +49,32 @@ The backend enforces user-level data isolation, ensuring users can only access t
 - Clean, responsive UI
 
 ---
-
-## 📂 Project Structure
-Interview_Tracker/
-├── backend/              # Spring Boot API
-│   ├── src/
-│   └── pom.xml
-│
-├── frontend/             # React (Vite) client
-│   ├── src/
-│   └── package.json
-
----
-
 ## ⚙️ Local Development Setup
 
 ## 1️⃣ Clone the repo
 
 
 git clone https://github.com/SajedAtwa/Interview_Tracker.git
+
 cd Interview_Tracker
 
 ## 2️⃣ Backend Setup
 
 cd backend
+
 ./mvnw spring-boot:run
 
 Backend runs on:
 http://localhost:8080
+
 Make sure PostgreSQL is running and your application.yml or application.properties is configured correctly.
 
 ## 3️⃣ Frontend Setup
 
 cd frontend
+
 npm install
+
 npm run dev
 
 Frontend runs on:
@@ -91,4 +83,5 @@ http://localhost:5173
 ## 👤 Author
 
 Sajed Atwa
+
 Full-Stack Developer
