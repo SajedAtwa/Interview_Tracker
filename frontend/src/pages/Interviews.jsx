@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import api from "../api.js";
+import CsvImport from "../components/CsvImport.jsx";
 
 function toDatetimeLocalValue(iso) {
   if (!iso) return "";
@@ -37,6 +38,15 @@ export default function Interviews() {
   const [editStatus, setEditStatus] = useState("Scheduled");
   const [editNotes, setEditNotes] = useState("");
   const [savingEdit, setSavingEdit] = useState(false);
+  const [isImportOpen, setIsImportOpen] = useState(true);
+
+  function collapseImport() {
+    setIsImportOpen(false);
+  }
+
+  function toggleImport() {
+    setIsImportOpen((v) => !v);
+  }
 
   async function load() {
     setError("");
@@ -173,12 +183,55 @@ export default function Interviews() {
           </div>
         </div>
 
-        <button className="btn" type="button" onClick={load} disabled={loading}>
+        <button
+          className="btn"
+          type="button"
+          onClick={() => {
+            collapseImport();
+            load();
+          }}
+          disabled={loading}
+        >
           {loading ? "Refreshing..." : "Refresh"}
         </button>
       </div>
 
       {error && <div className="alert alertError">{String(error)}</div>}
+
+      {/* IMPORT (added) */}
+      <div className="panel">
+        <div className="panelHeader" style={{ cursor: "pointer" }} onClick={toggleImport}>
+          <div style={{ fontWeight: 800, display: "flex", alignItems: "center", gap: 10 }}>
+            Import CSV
+            <span style={{ fontSize: 12, opacity: 0.7 }}>
+              {isImportOpen ? "▲" : "▼"}
+            </span>
+          </div>
+
+          <div
+            style={{
+              fontSize: 13,
+              fontWeight: 500,
+              color: "#555",
+              textAlign: "right",
+            }}
+          >
+            Upload a CSV and map columns to bulk add interviews.
+          </div>
+        </div>
+
+        {isImportOpen && (
+          <div style={{ paddingTop: 8 }}>
+            {/* IMPORTANT: this needs CsvImport to call onImported() */}
+            <CsvImport
+              onImported={() => {
+                collapseImport(); // collapse after successful import
+                load(); // refresh list
+              }}
+            />
+          </div>
+        )}
+      </div>  
 
       {/* CREATE (keep your layout the same) */}
       <div className="panel">
