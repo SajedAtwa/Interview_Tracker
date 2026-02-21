@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import com.example.Interview_Tracker.dto.InterviewImportRowDto;
+import java.util.Map;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,5 +49,14 @@ public class InterviewController {
     @DeleteMapping("/{id}")
     public void delete(Authentication auth, @PathVariable UUID id) {
         interviewService.delete(userId(auth), id);
+    }
+
+    @PostMapping("/import")
+    public Map<String, Object> importInterviews(
+            Authentication auth,
+            @Valid @RequestBody List<InterviewImportRowDto> rows
+    ) {
+        int imported = interviewService.importRows(userId(auth), rows);
+        return Map.of("imported", imported);
     }
 }
