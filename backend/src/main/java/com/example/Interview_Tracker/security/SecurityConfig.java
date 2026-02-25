@@ -30,6 +30,7 @@ public class SecurityConfig {
 
                 // Allow auth endpoints
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/health").permitAll()
 
                 // (optional) allow swagger if you use it
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
