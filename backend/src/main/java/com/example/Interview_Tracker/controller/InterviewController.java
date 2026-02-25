@@ -11,6 +11,7 @@ import java.util.Map;
 
 import java.util.List;
 import java.util.UUID;
+import com.example.Interview_Tracker.service.ReminderJob;
 
 @RestController
 @RequestMapping("/api/interviews")
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class InterviewController {
 
     private final InterviewService interviewService;
-
+    private final ReminderJob reminderJob;
     private UUID userId(Authentication auth) {
         return (UUID) auth.getPrincipal();
     }
@@ -58,5 +59,13 @@ public class InterviewController {
     ) {
         int imported = interviewService.importRows(userId(auth), rows);
         return Map.of("imported", imported);
+    }
+
+    @PostMapping("/test-email")
+    public Map<String, String> testEmail(Authentication auth) {
+        // sends to the logged-in user's email
+        // (so you don't hardcode yours)
+        reminderJob.testManual("sajedatwa78@gmail.com"); // OR fetch from DB if you want
+        return Map.of("status", "Triggered test email");
     }
 }

@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface InterviewRepository extends JpaRepository<Interview, UUID> {
     List<Interview> findAllByUserIdOrderByInterviewDateDesc(UUID userId);
     Optional<Interview> findByIdAndUserId(UUID id, UUID userId);
+    // interviews between [start, end) that haven't been reminded yet
+    List<Interview> findByInterviewDateBetweenAndReminderSentAtIsNull(Instant start, Instant end);
 }
