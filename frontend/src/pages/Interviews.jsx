@@ -298,15 +298,16 @@ export default function Interviews() {
 
       {/* CALENDAR VIEW */}
       {viewMode === "calendar" && (
-        <div className="panel">
+        <div className="panel panelWide">
           <div className="panelHeader">
-            <div style={{ fontWeight: 800 }}>Calendar</div>
-            <div className="muted" style={{ fontSize: 12 }}>
-              Click an interview to edit. Click an empty slot to prefill the Add form.
+            <div style={{ fontWeight: 900, fontSize: 18 }}>Calendar</div>
+
+            <div className="calendarHint">
+              Click an interview to edit • Click an empty slot to prefill the Add form
             </div>
           </div>
 
-          <div style={{ height: 720 }}>
+          <div className="rbcWrap">
             <Calendar
               localizer={localizer}
               events={calendarEvents}
