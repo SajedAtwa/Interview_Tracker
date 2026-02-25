@@ -35,4 +35,7 @@ public class Interview {
 
     @Column(length = 2000)
     private String notes;
+
+    @Column
+    private Instant reminderSentAt;
 }
