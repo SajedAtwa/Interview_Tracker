@@ -10,7 +10,10 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ReminderJob {
@@ -23,6 +26,7 @@ public class ReminderJob {
                     .withZone(ZoneId.systemDefault());
 
     // runs every 5 minutes
+    @Transactional
     @Scheduled(fixedDelay = 300_000)
     public void send24HourReminders() {
         Instant now = Instant.now();
@@ -31,8 +35,12 @@ public class ReminderJob {
         Instant start = now.plusSeconds(24 * 3600);
         Instant end = start.plusSeconds(60 * 60);
 
+        log.info("ReminderJob tick. now={} window=[{}, {})", now, start, end);
+
         List<Interview> due = interviewRepository
-                .findByInterviewDateBetweenAndReminderSentAtIsNull(start, end);
+            .findByInterviewDateBetweenAndReminderSentAtIsNull(start, end);
+
+        log.info("ReminderJob found {} due interviews", due.size());
 
         for (Interview it : due) {
             String to = it.getUser().getEmail(); // users already have email
