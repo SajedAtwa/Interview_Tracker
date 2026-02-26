@@ -29,7 +29,7 @@ public class ReminderJob {
 
         // window = interviews happening 24h-24h5m from now (approx)
         Instant start = now.plusSeconds(24 * 3600);
-        Instant end = start.plusSeconds(5 * 60);
+        Instant end = start.plusSeconds(60 * 60);
 
         List<Interview> due = interviewRepository
                 .findByInterviewDateBetweenAndReminderSentAtIsNull(start, end);
